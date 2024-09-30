@@ -1,4 +1,4 @@
-# ./.vscode/LoadALLanguage.ps1;
+./.vscode/LoadALLanguage.ps1;
 
 mkdir ../AlDebugProject
 
