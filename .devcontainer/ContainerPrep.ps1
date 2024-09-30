@@ -1,30 +1,42 @@
 ./.vscode/LoadALLanguage.ps1;
 
+dotnet build BusinessCentral.LinterCop/BusinessCentral.LinterCop.csproj /p:FeatureFlags=\#ManifestHelper
+
 mkdir ../AlDebugProject
+mkdir ../AlDebugProject/.vscode
 
-touch ../AlDebugProject/app.json
-printf '{\n' >> ../AlDebugProject/app.json
-printf '  "id": "d700542d-5688-4e64-aecb-648fa385a652",\n' >> ../AlDebugProject/app.json
-printf '  "name": "ALProject1",\n' >> ../AlDebugProject/app.json
-printf '  "publisher": "Default Publisher",\n' >> ../AlDebugProject/app.json
-printf '  "version": "1.0.0.0"\n' >> ../AlDebugProject/app.json
-printf '}' >> ../AlDebugProject/app.json
+$AppJson = @"
+{
+  "id": "d700542d-5688-4e64-aecb-648fa385a652",
+  "name": "ALProject1",
+  "publisher": "Default Publisher",
+  "version": "1.0.0.0"
+}
+"@
 
-touch ../AlDebugProject/test.al
-printf 'codeunit 1 MyCodeunit\n' >> ../AlDebugProject/test.al
-printf '{\n' >> ../AlDebugProject/test.al
-printf '    trigger OnRun()\n' >> ../AlDebugProject/test.al
-printf '    begin\n' >> ../AlDebugProject/test.al
-printf '\n' >> ../AlDebugProject/test.al
-printf '    end;\n' >> ../AlDebugProject/test.al
-printf '}' >> ../AlDebugProject/test.al
+$AppJson | Out-File -FilePath ../AlDebugProject/app.json
 
-touch ../AlDebugProject/.vscode/settings.json
-printf '{\n' >> ../AlDebugProject/.vscode/settings.json
-printf '    "al.codeAnalyzers": [' >> ../AlDebugProject/.vscode/settings.json
-printf '        "/workspaces/BusinessCentral.LinterCop/BusinessCentral.LinterCop/bin/Debug/netstandard2.1/BusinessCentral.LinterCop.dll"' >> ../AlDebugProject/.vscode/settings.json
-printf '    ],' >> ../AlDebugProject/.vscode/settings.json
-printf '    "al.enableCodeAnalysis": true' >> ../AlDebugProject/.vscode/settings.json
-printf '}' >> ../AlDebugProject/.vscode/settings.json
+$TestCodeunit = @"
+codeunit 1 MyCodeunit
+{
+    trigger OnRun()
+    begin
+
+    end;
+}
+"@
+
+$TestCodeunit | Out-File -FilePath ../AlDebugProject/test.al
+
+$Settings = @"
+{
+    "al.codeAnalyzers": [
+        "/workspaces/BusinessCentral.LinterCop/BusinessCentral.LinterCop/bin/Debug/netstandard2.1/BusinessCentral.LinterCop.dll"
+    ],
+    "al.enableCodeAnalysis": true
+}
+"@
+
+$Settings | Out-File -FilePath ../AlDebugProject/.vscode/settings.json
 
 code ../AlDebugProject/
