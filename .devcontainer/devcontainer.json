@@ -1,7 +1,7 @@
 {
   "image": "mcr.microsoft.com/devcontainers/dotnet",
   "features": {},
-  "postCreateCommand": "pwsh .devcontainer/ContainerPrep.ps1",
+  "postCreateCommand": "pwsh /workspaces/BusinessCentral.LinterCop/.devcontainer/ContainerPrep.ps1",
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
