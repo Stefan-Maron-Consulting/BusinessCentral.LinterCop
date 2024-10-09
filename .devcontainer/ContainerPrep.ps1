@@ -2,8 +2,8 @@
 
 dotnet build BusinessCentral.LinterCop/BusinessCentral.LinterCop.csproj /p:FeatureFlags=\#ManifestHelper
 
-mkdir ../AlDebugProject
-mkdir ../AlDebugProject/.vscode
+mkdir /workspaces/AlDebugProject
+mkdir /workspaces/AlDebugProject/.vscode
 
 $AppJson = @"
 {
@@ -14,7 +14,7 @@ $AppJson = @"
 }
 "@
 
-$AppJson | Out-File -FilePath ../AlDebugProject/app.json
+$AppJson | Out-File -FilePath /workspaces/AlDebugProject/app.json
 
 $TestCodeunit = @"
 codeunit 1 MyCodeunit
@@ -26,7 +26,7 @@ codeunit 1 MyCodeunit
 }
 "@
 
-$TestCodeunit | Out-File -FilePath ../AlDebugProject/test.al
+$TestCodeunit | Out-File -FilePath /workspaces/AlDebugProject/test.al
 
 $Settings = @"
 {
@@ -37,6 +37,6 @@ $Settings = @"
 }
 "@
 
-$Settings | Out-File -FilePath ../AlDebugProject/.vscode/settings.json
+$Settings | Out-File -FilePath /workspaces/AlDebugProject/.vscode/settings.json
 
-code ../AlDebugProject/
+code /workspaces/AlDebugProject/
